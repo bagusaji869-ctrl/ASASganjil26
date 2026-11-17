@@ -259,7 +259,7 @@
 
 <script>
     const SECRET_KEY = 5791; // Harus sama dengan file ujian siswa
-    const PASSWORD_PENGAWAS = "963456"; // Anda dapat mengganti kata sandi pengawas di sini
+    const PASSWORD_PENGAWAS = "pengawas2026"; // Anda dapat mengganti kata sandi pengawas di sini
 
     function generate15MinToken() {
         const now = new Date();
@@ -306,3 +306,36 @@
         const formattedTime = 
             String(remainingMinutes).padStart(2, '0') + ":" + 
             String(remainingSeconds).padStart(2, '0');
+
+        document.getElementById('countdown').textContent = formattedTime;
+    }
+
+    // Handle Login Pengawas
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const inputSandi = document.getElementById('passwordInput').value.trim();
+
+        if (inputSandi === PASSWORD_PENGAWAS) {
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.getElementById('mainContainer').style.maxWidth = '550px';
+
+            updatePanel();
+            timerInterval = setInterval(updatePanel, 1000);
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+        }
+    });
+
+    function logoutPengawas() {
+        clearInterval(timerInterval);
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('dashboardSection').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('mainContainer').style.maxWidth = '480px';
+    }
+</script>
+
+</body>
+</html>
