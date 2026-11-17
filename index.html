@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ujian Sekolah SMKN 5 Yogyakarta 2026/2027</title>
+    <title>ASAS SMKN 5 Yogyakarta 2026/2027</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
@@ -113,42 +113,10 @@
             align-items: center;
             text-align: left;
         }
-
-        /* Kontrol Pilih Hari (Dropdown / Pull-down) */
-        .filter-container {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .filter-container label {
-            font-size: 13px;
-            color: #0d47a1;
-            font-weight: 700;
-            margin-bottom: 0;
-            white-space: nowrap;
-        }
-        .filter-select {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 13px;
-            background-color: #fff;
-            color: #1e293b;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .filter-select:focus { outline: none; border-color: #0d47a1; }
         
         /* Grid responsif untuk daftar kartu soal di desktop */
         .menu-list { 
-            max-height: 58vh; 
+            max-height: 62vh; 
             overflow-y: auto; 
             padding-right: 6px; 
             display: grid;
@@ -168,7 +136,7 @@
             height: 100%;
         }
         .item-title { font-size: 15px; font-weight: 700; color: #0d47a1; margin-bottom: 6px; }
-        .item-info { font-size: 12px; color: #64748b; margin-bottom: 14px; }
+        .item-info { font-size: 12px; color: #64748b; margin-bottom: 10px; }
         
         .btn-gform {
             display: block;
@@ -192,12 +160,11 @@
             background: #fffbebf8;
             border: 1px solid #fef3c7;
             color: #b45309;
-            padding: 24px 16px;
+            padding: 30px 20px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             line-height: 1.5;
-            margin-top: 10px;
             text-align: center;
         }
 
@@ -239,14 +206,74 @@
             border: none;
         }
 
+        /* Styling untuk Animasi Teks Berkedip & Kotak Peringatan Pelanggaran */
+        @keyframes blinkingText {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .warning-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .warning-box {
+            background: #ffffff;
+            border: 4px solid #dc2626;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.5);
+        }
+
+        .warning-box h3 {
+            color: #dc2626;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 800;
+            animation: blinkingText 0.8s infinite;
+        }
+
+        .warning-box p {
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .btn-warning-ok {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+        }
+        .btn-warning-ok:hover { background: #b91c1c; }
+
         /* Penyesuaian Responsif Layar Kecil (Smartphone) */
         @media (max-width: 600px) {
             .wrapper { padding: 10px; }
             .card { padding: 20px 15px; }
-            .filter-container { flex-direction: column; align-items: stretch; gap: 6px; }
             .menu-list { 
                 grid-template-columns: 1fr; 
-                max-height: 50vh;
+                max-height: 55vh;
             }
         }
     </style>
@@ -260,8 +287,8 @@
         <div id="loginSection" class="card">
             <div class="header">
                 <img src="images.jpg" alt="Logo SMKN 5 Yogyakarta" class="school-logo">
-                <h2>Ujian Sekolah SMKN 5 Yogyakarta 2026/2027</h2>
-                <p>Masukkan Token Ujian Sesi 15-Menit</p>
+                <h2>ASAS SMKN 5 Yogyakarta 2026/2027</h2>
+                <p>Asesmen Sumatif Akhir Semester - Masukkan Token Ujian</p>
             </div>
             
             <form id="loginForm">
@@ -269,7 +296,7 @@
                     <label for="tokenInput">TOKEN UJIAN</label>
                     <input type="text" id="tokenInput" placeholder="Contoh: K5-8392" maxlength="10" required autocomplete="off">
                 </div>
-                <button type="submit" class="btn">Masuk Portal Ujian</button>
+                <button type="submit" class="btn">Masuk Portal ASAS</button>
                 <div id="loginError" class="error-msg">Token salah atau sudah kadaluwarsa!</div>
             </form>
 
@@ -283,26 +310,14 @@
         <div id="menuSection" class="card">
             <div class="menu-header">
                 <div>
-                    <h1 style="font-size:15px;">Ujian Sekolah SMKN 5 Yogyakarta 2026/2027</h1>
-                    <p style="font-size: 11px; color: #93c5fd;">Pilih Jadwal Mata Pelajaran Ujian</p>
+                    <h1 style="font-size:15px;">ASAS SMKN 5 Yogyakarta 2026/2027</h1>
+                    <p style="font-size: 11px; color: #93c5fd;" id="subHeaderInfo">Jadwal Ujian Hari Ini</p>
                 </div>
                 <button onclick="logout()" class="btn btn-danger">Keluar</button>
             </div>
 
-            <!-- Menu Pull-Down / Dropdown Pilihan Hari -->
-            <div class="filter-container">
-                <label for="daySelect">PILIH HARI UJIAN:</label>
-                <select id="daySelect" class="filter-select" onchange="renderMenuSchedule()">
-                    <option value="2026-11-02">Senin, 2 November 2026</option>
-                    <option value="2026-11-03">Selasa, 3 November 2026</option>
-                    <option value="2026-11-04">Rabu, 4 November 2026</option>
-                    <option value="2026-11-05">Kamis, 5 November 2026</option>
-                    <option value="2026-11-06">Jumat, 6 November 2026</option>
-                </select>
-            </div>
-
             <div class="menu-list" id="menuListContainer">
-                <!-- Konten Mata Pelajaran Ditampilkan Berdasarkan Dropdown -->
+                <!-- Konten Mata Pelajaran Ditampilkan Otomatis Menurut Tanggal Hari Ini -->
             </div>
         </div>
 
@@ -312,57 +327,83 @@
 <!-- LAYAR GOOGLE FORM -->
 <div id="gformSection">
     <div class="gform-bar">
-        <span style="color: #ffffff; font-size: 13px; font-weight: 600;">Ujian Sekolah SMKN 5 Yogyakarta 2026/2027</span>
+        <span style="color: #ffffff; font-size: 13px; font-weight: 600;">ASAS SMKN 5 Yogyakarta 2026/2027</span>
         <button onclick="keluarDariSoal()" class="btn-back-portal">&larr; Selesai / Kembali ke Menu</button>
     </div>
     <iframe id="gformIframe" class="gform-iframe" src="about:blank"></iframe>
 </div>
 
+<!-- POPUP PERINGATAN KECURANGAN BERKEDIP -->
+<div id="warningOverlay" class="warning-overlay">
+    <div class="warning-box">
+        <h3 id="warningTitle">PERINGATAN PELANGGARAN!</h3>
+        <p id="warningText">Anda terdeteksi keluar dari layar ujian!</p>
+        <button onclick="tutupPeringatan()" class="btn-warning-ok">Saya Mengerti</button>
+    </div>
+</div>
+
 <script>
     const SECRET_KEY = 5791;
 
-    // DATA JADWAL UJIAN SEKOLAH TAHUN 2026/2027
+    // DATA JADWAL ASAS TAHUN PELAJARAN 2026/2027 BERDASARKAN DOKUMEN RESMI
     const jadwalUjian = {
-        "2026-11-02": [
-            { title: "Pendidikan Agama Islam dan Budi Pekerti", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
-            { title: "Pendidikan Agama Kristen dan Budi Pekerti", link: "https://forms.gle/xZh5aSRVZXCt4jtx9" },
-            { title: "Pendidikan Agama Katolik dan Budi Pekerti", link: "https://forms.gle/wqUEN26fTKsFD5hA9" },
-            { title: "Pendidikan Agama Hindu dan Budi Pekerti", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
-            { title: "Bahasa Indonesia", link: "https://forms.gle/h4tiEGaFJrLhbZLbA" }
+        "2026-11-24": [
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
+            { title: "Bahasa Indonesia", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/h4tiEGaFJrLhbZLbA" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/xZh5aSRVZXCt4jtx9" },
+            { title: "Bahasa Indonesia", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/wqUEN26fTKsFD5hA9" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
+            { title: "Bahasa Indonesia", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Y16CTrx3GaEtZzwx9" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/RimNw3Fo4Z9pzKnMA" },
+            { title: "Bahasa Indonesia", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" }
         ],
-        "2026-11-03": [
-            { title: "Pendidikan Pancasila", link: "https://forms.gle/Y16CTrx3GaEtZzwx9" },
-            { title: "Bahasa Jawa", link: "https://forms.gle/RimNw3Fo4Z9pzKnMA" }
+        "2026-11-26": [
+            { title: "Bahasa Jawa", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/ZTECCtRSNrZFX1NS9" },
+            { title: "Bahasa Jawa", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/7FNFYYH8sgVWZdQ3A" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
+            { title: "Bahasa Jawa", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Lkbi6KVnbYEfwmHz5" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/8peeURcqw5GrRA8W8" },
+            { title: "Bahasa Jawa", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/M7XWV47fURU2gv3g9" }
         ],
-        "2026-11-04": [
-            { title: "Bahasa Inggris", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" },
-            { title: "Bahasa Jepang", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" }
+        "2026-11-27": [
+            { title: "IPAS", sesi: "Sesi I (07.10 - 08.20)", kelas: "Kelas X", link: "https://forms.gle/oiDgUXUcvZY67HcHA" },
+            { title: "Dasar Program Keahlian", sesi: "Sesi I (07.10 - 08.20)", kelas: "Kelas X", link: "https://forms.gle/qYMmok9kWhXScsi17" },
+            { title: "IPAS", sesi: "Sesi II (08.50 - 10.00)", kelas: "Kelas X", link: "https://forms.gle/9UxJsrMtURByyEwA8" },
+            { title: "Dasar Program Keahlian", sesi: "Sesi II (08.50 - 10.00)", kelas: "Kelas X", link: "https://forms.gle/AT2mHDDJC5TmEhLb8" },
+            { title: "Projek Kewirausahaan / Mapel Pilihan", sesi: "Sesi III (10.30 - 11.40)", kelas: "Kelas XI", link: "https://forms.gle/MEuS59po3jTLceqMA" },
+            { title: "Projek Kewirausahaan / Mapel Pilihan", sesi: "Sesi IV (12.30 - 13.40)", kelas: "Kelas XI", link: "https://forms.gle/ytwQsf9CBYytoqXT7" }
         ],
-        "2026-11-05": [
-            { title: "Matematika", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) DKV", link: "https://forms.gle/ZTECCtRSNrZFX1NS9" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Animasi", link: "https://forms.gle/7FNFYYH8sgVWZdQ3A" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Logam", link: "https://forms.gle/632xyTxqfveQUPFf6" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Kulit", link: "https://forms.gle/Lkbi6KVnbYEfwmHz5" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Kayu", link: "https://forms.gle/8peeURcqw5GrRA8W8" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Keramik", link: "https://forms.gle/M7XWV47fURU2gv3g9" },
-            { title: "Projek Kreatif dan Kewirausahaan (Prkdk) Tekstil", link: "https://forms.gle/oiDgUXUcvZY67HcHA" }
+        "2026-11-30": [
+            { title: "Matematika", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/VNq6DuL6X2NVLWzA7" },
+            { title: "Sejarah Indonesia", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/vpGGyt3gtBMTg5yp6" },
+            { title: "Matematika", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/72gkrVJbdPbiV4MU9" },
+            { title: "Sejarah Indonesia", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/K6x73e7PcxD8jhZu6" },
+            { title: "Matematika", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/S1zkKEuyESG2o4Cd8" },
+            { title: "Sejarah Indonesia", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/32Dxic4KEkLRd43A6" },
+            { title: "Matematika", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/JUsqfdtC797NpTpH9" },
+            { title: "Sejarah Indonesia", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/DKKQd7koBj8q5N7g6" }
         ],
-        "2026-11-06": [
-            { title: "Mata Pelajaran Pilihan (MAPIL) DKV", link: "https://forms.gle/qYMmok9kWhXScsi17" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Animasi", link: "https://forms.gle/9UxJsrMtURByyEwA8" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Logam", link: "https://forms.gle/AT2mHDDJC5TmEhLb8" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Kulit", link: "https://forms.gle/MEuS59po3jTLceqMA" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Kayu", link: "https://forms.gle/ytwQsf9CBYytoqXT7" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Keramik", link: "https://forms.gle/VNq6DuL6X2NVLWzA7" },
-            { title: "Mata Pelajaran Pilihan (MAPIL) Tekstil", link: "https://forms.gle/vpGGyt3gtBMTg5yp6" },
-            { title: "Konsentrasi Kejuruan DKV", link: "https://forms.gle/72gkrVJbdPbiV4MU9" },
-            { title: "Konsentrasi Kejuruan Animasi", link: "https://forms.gle/K6x73e7PcxD8jhZu6" },
-            { title: "Konsentrasi Kejuruan Logam", link: "https://forms.gle/S1zkKEuyESG2o4Cd8" },
-            { title: "Konsentrasi Kejuruan Kulit", link: "https://forms.gle/32Dxic4KEkLRd43A6" },
-            { title: "Konsentrasi Kejuruan Kayu", link: "https://forms.gle/JUsqfdtC797NpTpH9" },
-            { title: "Konsentrasi Kejuruan Keramik", link: "https://forms.gle/DKKQd7koBj8q5N7g6" },
-            { title: "Konsentrasi Kejuruan Tekstil", link: "https://forms.gle/gjwxMsSy4F6XpXQb8" }
+        "2026-12-01": [
+            { title: "Bahasa Inggris", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/gjwxMsSy4F6XpXQb8" },
+            { title: "Seni", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
+            { title: "Bahasa Inggris", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/xZh5aSRVZXCt4jtx9" },
+            { title: "Seni", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/wqUEN26fTKsFD5hA9" },
+            { title: "Bahasa Inggris", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
+            { title: "Bahasa Jepang", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Y16CTrx3GaEtZzwx9" },
+            { title: "Bahasa Inggris", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/RimNw3Fo4Z9pzKnMA" },
+            { title: "Bahasa Jepang", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" }
+        ],
+        "2026-12-02": [
+            { title: "Informatika", sesi: "Sesi I (07.15 - 09.00)", kelas: "Kelas X", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" },
+            { title: "KKA / Penjasorkes", sesi: "Sesi I (07.15 - 09.00)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
+            { title: "Informatika", sesi: "Sesi II (09.15 - 11.00)", kelas: "Kelas X", link: "https://forms.gle/ZTECCtRSNrZFX1NS9" },
+            { title: "Penjasorkes", sesi: "Sesi II (09.15 - 11.00)", kelas: "Kelas X", link: "https://forms.gle/7FNFYYH8sgVWZdQ3A" },
+            { title: "Penjasorkes", sesi: "Sesi III (11.15 - 12.45)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
+            { title: "Konsentrasi Kejuruan", sesi: "Sesi III (11.15 - 12.45)", kelas: "Kelas XI", link: "https://forms.gle/Lkbi6KVnbYEfwmHz5" },
+            { title: "Penjasorkes", sesi: "Sesi IV (13.00 - 14.30)", kelas: "Kelas XI", link: "https://forms.gle/8peeURcqw5GrRA8W8" },
+            { title: "Konsentrasi Kejuruan", sesi: "Sesi IV (13.00 - 14.30)", kelas: "Kelas XI", link: "https://forms.gle/M7XWV47fURU2gv3g9" }
         ]
     };
 
@@ -390,8 +431,9 @@
     }
 
     let jumlahKabur = 0;
-    const batasKabur = 3;
+    const batasKabur = 2; // Maksimal 2 kali keluar tab
 
+    // Deteksi Berpindah Tab / Keluar Layar dengan Peringatan Bertahap Berkedip
     document.addEventListener("visibilitychange", async function() {
         const gformDisplay = document.getElementById('gformSection').style.display;
         const menuDisplay = document.getElementById('menuSection').style.display;
@@ -404,13 +446,23 @@
             jumlahKabur++;
             
             if (jumlahKabur >= batasKabur) {
-                alert("UJIAN DIBATALKAN!\n\nAnda telah terdeteksi keluar dari layar ujian sebanyak " + batasKabur + " kali.");
-                keluarDariSoal();
+                document.getElementById('warningTitle').textContent = "ASAS DIBATALKAN!";
+                document.getElementById('warningText').innerHTML = "Anda telah terdeteksi keluar dari layar ujian sebanyak <strong>2 kali</strong>.<br>Sistem menutup sesi ujian Anda secara otomatis.";
+                document.getElementById('warningOverlay').style.display = 'flex';
             } else {
-                alert("PERINGATAN (" + jumlahKabur + "/" + batasKabur + ")!\n\nDilarang keluar aplikasi, membuka tab lain, atau membalas notifikasi!");
+                document.getElementById('warningTitle').textContent = "PERINGATAN (" + jumlahKabur + "/" + batasKabur + ")!";
+                document.getElementById('warningText').innerHTML = "Dilarang keluar aplikasi, membuka tab lain, atau membalas notifikasi!<br><span style='color: #dc2626; font-weight: bold;'>Sisa kesempatan keluar: 1 kali lagi sebelum ujian dibatalkan.</span>";
+                document.getElementById('warningOverlay').style.display = 'flex';
             }
         }
     });
+
+    function tutupPeringatan() {
+        document.getElementById('warningOverlay').style.display = 'none';
+        if (jumlahKabur >= batasKabur) {
+            logout();
+        }
+    }
 
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', function(e) {
@@ -419,100 +471,3 @@
             (e.ctrlKey && e.key === 'u') || 
             (e.ctrlKey && e.key === 'c') || 
             (e.ctrlKey && e.key === 'v')) {
-            e.preventDefault();
-        }
-    });
-
-    function generate15MinToken() {
-        const now = new Date();
-        const tanggal = now.getDate();
-        const bulan = now.getMonth() + 1;
-        const jam = now.getHours();
-        const blok15Menit = Math.floor(now.getMinutes() / 15);
-        
-        let seed = (tanggal * 73) + (bulan * 31) + (jam * 13) + (blok15Menit * 7) + SECRET_KEY;
-        let lcgVal = (seed * 1664525 + 1013904223) % 4294967296;
-        const hashCode = Math.abs(lcgVal) % 10000;
-        
-        return "K5-" + String(hashCode).padStart(4, '0');
-    }
-
-    function renderMenuSchedule() {
-        const selectedDate = document.getElementById('daySelect').value;
-        const container = document.getElementById('menuListContainer');
-        container.innerHTML = '';
-
-        const listMapel = jadwalUjian[selectedDate];
-
-        if (!listMapel || listMapel.length === 0) {
-            container.innerHTML = `<div class="no-schedule-msg">Tidak ada jadwal ujian untuk tanggal ini.</div>`;
-            return;
-        }
-
-        let htmlContent = '';
-        listMapel.forEach(item => {
-            htmlContent += `
-                <div class="item-card">
-                    <div>
-                        <div class="item-title">${item.title}</div>
-                        <div class="item-info">Durasi: 60 Menit</div>
-                    </div>
-                    <button onclick="bukaGForm('${item.link}')" class="btn-gform">Kerjakan Soal</button>
-                </div>
-            `;
-        });
-
-        container.innerHTML = htmlContent;
-    }
-
-    function switchTab(target) {
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('menuSection').style.display = 'none';
-        document.getElementById('gformSection').style.display = 'none';
-
-        if (target === 'login') {
-            document.getElementById('loginSection').style.display = 'block';
-            releaseWakeLock();
-        } else if (target === 'menu') {
-            // Set default pilihan dropdown ke hari pertama jika belum ada, lalu render
-            renderMenuSchedule();
-            document.getElementById('menuSection').style.display = 'block';
-        }
-    }
-
-    function bukaGForm(urlForm) {
-        document.getElementById('gformIframe').src = urlForm;
-        document.getElementById('gformSection').style.display = 'flex';
-        requestWakeLock();
-    }
-
-    function keluarDariSoal() {
-        document.getElementById('gformIframe').src = 'about:blank';
-        document.getElementById('gformSection').style.display = 'none';
-        jumlahKabur = 0;
-        // Kembali ke halaman menu utama (bukan ke halaman login, agar mudah memilih mapel lain)
-        switchTab('menu');
-    }
-
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const inputVal = document.getElementById('tokenInput').value.trim().toUpperCase();
-        const validToken = generate15MinToken();
-
-        if (inputVal === validToken) {
-            document.getElementById('loginError').style.display = 'none';
-            requestWakeLock();
-            switchTab('menu');
-        } else {
-            document.getElementById('loginError').style.display = 'block';
-        }
-    });
-
-    function logout() {
-        document.getElementById('tokenInput').value = '';
-        switchTab('login');
-    }
-</script>
-
-</body>
-</html>
