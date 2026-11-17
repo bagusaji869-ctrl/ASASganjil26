@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Pengawas - Token ASAS SMKN 5 Yogyakarta</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #1e293b;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-top: 6px solid #3b82f6;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .header {
+            padding: 25px 20px;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+
+        .header img {
+            width: 75px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            color: #3b82f6;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .token-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .token-box {
+            background: #0f172a;
+            border: 2px dashed #3b82f6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .token-code {
+            font-size: 48px;
+            font-weight: 800;
+            color: #60a5fa;
+            letter-spacing: 6px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .timer-container {
+            background: #334155;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .timer-label {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .timer-countdown {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f59e0b;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .info-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 13px;
+            color: #93c5fd;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .info-card ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .footer {
+            padding: 15px;
+            background: #0f172a;
+            font-size: 11px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="images.jfif" alt="Logo SMKN 5 Yogyakarta">
+        <h1>PANEL PENGAWAS ASAS 2026/2027</h1>
+        <p>SMKN 5 Yogyakarta — Pemantau Token Aktif Real-Time</p>
+    </div>
+
+    <div class="content">
+        <div class="token-label">Token Ujian Aktif Saat Ini</div>
+        <div class="token-box">
+            <div id="activeToken" class="token-code">K5-XXXX</div>
+        </div>
+
+        <div class="timer-container">
+            <div class="timer-label">Token Akan Segera Diperbarui Dalam:</div>
+            <div id="countdown" class="timer-countdown">00:00</div>
+        </div>
+
+        <div class="info-card">
+            <strong>Catatan Pengawas:</strong>
+            <ul>
+                <li>Token otomatis berganti setiap <strong>15 menit sekali</strong>.</li>
+                <li>Pastikan siswa memasukkan token yang tertera di panel ini sesuai dengan sesi ujian yang sedang berlangsung.</li>
+                <li>Jangan membagikan token di luar jam sesi ujian aktif.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        Sistem Keamanan Ujian Berbasis Token Otomatis &copy; 2026
+    </div>
+</div>
+
+<script>
+    const SECRET_KEY = 5791; // Harus sama dengan file ujian siswa
+
+    function generate15MinToken() {
+        const now = new Date();
+        const tanggal = now.getDate();
+        const bulan = now.getMonth() + 1;
+        const jam = now.getHours();
+        const blok15Menit = Math.floor(now.getMinutes() / 15);
+        
+        let seed = (tanggal * 73) + (bulan * 31) + (jam * 13) + (blok15Menit * 7) + SECRET_KEY;
+        let lcgVal = (seed * 1664525 + 1013904223) % 4294967296;
+        const hashCode = Math.abs(lcgVal) % 10000;
+        
+        return "K5-" + String(hashCode).padStart(4, '0');
+    }
+
+    function updatePanel() {
+        // Tampilkan Token Aktif
+        const token = generate15MinToken();
+        document.getElementById('activeToken').textContent = token;
+
+        // Hitung Sisa Waktu Menuju 15 Menit Berikutnya
+        const now = new Date();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        
+        const targetMinuteBlock = (Math.floor(minutes / 15) + 1) * 15;
+        
+        let remainingMinutes = 0;
+        let remainingSeconds = 0;
+
+        if (targetMinuteBlock >= 60) {
+            // Jika sudah mendekati pergantian jam
+            remainingMinutes = 59 - minutes;
+            remainingSeconds = 60 - seconds;
+        } else {
+            remainingMinutes = targetMinuteBlock - minutes - 1;
+            remainingSeconds = 60 - seconds;
+        }
+
+        if (remainingSeconds === 60) {
+            remainingMinutes++;
+            remainingSeconds = 0;
+        }
+
+        const formattedTime = 
+            String(remainingMinutes).padStart(2, '0') + ":" + 
+            String(remainingSeconds).padStart(2, '0');
+
+        document.getElementById('countdown').textContent = formattedTime;
+    }
+
+    // Jalankan pertama kali saat halaman dibuka
+    updatePanel();
+
+    // Perbarui setiap 1 detik untuk hitung mundur (countdown)
+    setInterval(updatePanel, 1000);
+</script>
+
+</body>
+</html>
