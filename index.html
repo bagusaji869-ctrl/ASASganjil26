@@ -37,7 +37,7 @@
         .card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 25px;
+            padding: 30px 25px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             border-top: 5px solid #0d47a1;
             text-align: center;
@@ -51,9 +51,9 @@
         }
 
         .school-logo {
-            width: 75px;
+            width: 85px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: inline-block;
         }
 
@@ -96,7 +96,7 @@
         .footer-info {
             font-size: 11px;
             color: #94a3b8;
-            margin-top: 15px;
+            margin-top: 20px;
             line-height: 1.4;
         }
 
@@ -105,39 +105,18 @@
         .menu-header {
             background: #0d47a1;
             color: #ffffff;
-            padding: 12px 20px;
+            padding: 15px 20px;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-align: left;
         }
-
-        /* Kotak Informasi Waktu / Global Countdown */
-        .exam-timer-bar {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            color: #1e40af;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .exam-timer-bar span {
-            color: #b91c1c;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 15px;
-            font-weight: 800;
-        }
         
         /* Area daftar mapel */
         .menu-list { 
-            max-height: 55vh; 
+            max-height: 62vh; 
             overflow-y: auto; 
             padding-right: 6px; 
             text-align: left;
@@ -145,34 +124,40 @@
 
         /* Styling Pembatas / Section Kelas */
         .class-section-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: #0d47a1;
-            margin: 12px 0 8px 0;
-            padding-bottom: 4px;
+            margin: 15px 0 10px 0;
+            padding-bottom: 5px;
             border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .class-section-title:first-child {
+            margin-top: 0;
         }
 
         .class-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 12px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .item-card { 
             background: #f8fafc; 
             border: 1px solid #e2e8f0; 
             border-radius: 8px; 
-            padding: 14px; 
+            padding: 16px; 
             text-align: left; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
         }
-        .item-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
-        .item-sesi { font-size: 11px; color: #64748b; margin-bottom: 8px; font-weight: 600; }
+        .item-title { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+        .item-sesi { font-size: 11px; color: #64748b; margin-bottom: 10px; font-weight: 600; }
         
         .btn-gform {
             display: block;
@@ -180,7 +165,7 @@
             background: #2563eb;
             color: #ffffff;
             text-decoration: none;
-            padding: 9px;
+            padding: 10px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 13px;
@@ -191,20 +176,15 @@
         }
         .btn-gform:hover { background: #1d4ed8; }
 
-        /* Tombol ketika status sudah selesai dikerjakan */
-        .btn-gform.completed {
-            background: #10b981 !important;
-            cursor: not-allowed;
-        }
-
         .no-schedule-msg {
             background: #fffbebf8;
             border: 1px solid #fef3c7;
             color: #b45309;
-            padding: 25px 20px;
+            padding: 30px 20px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
+            line-height: 1.5;
             text-align: center;
         }
 
@@ -307,10 +287,13 @@
         }
         .btn-warning-ok:hover { background: #b91c1c; }
 
+        /* Penyesuaian Responsif Layar Kecil (Smartphone) */
         @media (max-width: 600px) {
             .wrapper { padding: 10px; }
-            .card { padding: 15px; }
-            .class-grid { grid-template-columns: 1fr; }
+            .card { padding: 20px 15px; }
+            .class-grid { 
+                grid-template-columns: 1fr; 
+            }
         }
     </style>
 </head>
@@ -352,12 +335,6 @@
                 <button onclick="logout()" class="btn btn-danger">Keluar</button>
             </div>
 
-            <!-- Bar Countdown Timer Global Sisa Waktu Ujian -->
-            <div class="exam-timer-bar">
-                <span>⏱️ Sisa Waktu Sesi Ujian Hari Ini:</span>
-                <span id="globalCountdown">00:00:00</span>
-            </div>
-
             <div class="menu-list" id="menuListContainer">
                 <!-- Konten Mata Pelajaran Dikelompokkan Per Sesi Otomatis -->
             </div>
@@ -370,7 +347,8 @@
 <div id="gformSection">
     <div class="gform-bar">
         <span style="color: #ffffff; font-size: 13px; font-weight: 600;">ASAS SMKN 5 Yogyakarta 2026/2027</span>
-        <button onclick="keluarKeLogin()" class="btn-back-portal">&larr; Selesai / Kembali ke Login</button>
+        <!-- Tombol Selesai langsung mengarahkan kembali ke halaman login -->
+        <button onclick="logout()" class="btn-back-portal">&larr; Selesai / Kembali ke Login</button>
     </div>
     <iframe id="gformIframe" class="gform-iframe" src="about:blank"></iframe>
 </div>
@@ -386,45 +364,49 @@
 
 <script>
     const SECRET_KEY = 5791;
-    let activeMapelKey = null; // Menyimpan identifikasi mapel yang sedang dikerjakan
 
     // DATA JADWAL ASAS TAHUN PELAJARAN 2026/2027
     const jadwalUjian = {
         "2026-11-24": [
-            { id: "pali_x", title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
-            { id: "indo_x", title: "Bahasa Indonesia", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/h4tiEGaFJrLhbZLbA" },
-            { id: "pali_xi", title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
-            { id: "indo_xi", title: "Bahasa Indonesia", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Y16CTrx3GaEtZzwx9" },
-            { id: "pancasila_xi", title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" }
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
+            { title: "Bahasa Indonesia", sesi: "Sesi I (07.30 - 09.10)", kelas: "Kelas X", link: "https://forms.gle/h4tiEGaFJrLhbZLbA" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/xZh5aSRVZXCt4jtx9" },
+            { title: "Bahasa Indonesia", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/wqUEN26fTKsFD5hA9" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
+            { title: "Bahasa Indonesia", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Y16CTrx3GaEtZzwx9" },
+            { title: "Pendidikan Agama dan Budi Pekerti", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/RimNw3Fo4Z9pzKnMA" },
+            { title: "Bahasa Indonesia", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" }
         ],
         "2026-11-26": [
-            { id: "jawa_x", title: "Bahasa Jawa", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
-            { id: "pancasila_x", title: "Pendidikan Pancasila", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/ZTECCtRSNrZFX1NS9" },
-            { id: "jawa_xi", title: "Bahasa Jawa", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
-            { id: "pancasila_xi_26", title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/8peeURcqw5GrRA8W8" }
+            { title: "Bahasa Jawa", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/ZTECCtRSNrZFX1NS9" },
+            { title: "Bahasa Jawa", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
+            { title: "Pendidikan Pancasila", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/8peeURcqw5GrRA8W8" }
         ],
         "2026-11-27": [
-            { id: "ipas_x", title: "IPAS", sesi: "Sesi I (07.10 - 08.20)", kelas: "Kelas X", link: "https://forms.gle/oiDgUXUcvZY67HcHA" },
-            { id: "dasar_x", title: "Dasar Program Keahlian", sesi: "Sesi II (08.50 - 10.00)", kelas: "Kelas X", link: "https://forms.gle/qYMmok9kWhXScsi17" },
-            { id: "projek_xi", title: "Projek Kewirausahaan / Mapel Pilihan", sesi: "Sesi III (10.30 - 11.40)", kelas: "Kelas XI", link: "https://forms.gle/MEuS59po3jTLceqMA" }
+            { title: "IPAS", sesi: "Sesi I (07.10 - 08.20)", kelas: "Kelas X", link: "https://forms.gle/oiDgUXUcvZY67HcHA" },
+            { title: "Dasar Program Keahlian", sesi: "Sesi II (08.50 - 10.00)", kelas: "Kelas X", link: "https://forms.gle/qYMmok9kWhXScsi17" },
+            { title: "Projek Kewirausahaan / Mapel Pilihan", sesi: "Sesi III (10.30 - 11.40)", kelas: "Kelas XI", link: "https://forms.gle/MEuS59po3jTLceqMA" },
+            { title: "Projek Kewirausahaan / Mapel Pilihan", sesi: "Sesi IV (12.30 - 13.40)", kelas: "Kelas XI", link: "https://forms.gle/ytwQsf9CBYytoqXT7" }
         ],
         "2026-11-30": [
-            { id: "mat_x", title: "Matematika", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/VNq6DuL6X2NVLWzA7" },
-            { id: "sejarah_x", title: "Sejarah Indonesia", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/vpGGyt3gtBMTg5yp6" },
-            { id: "mat_xi", title: "Matematika", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/S1zkKEuyESG2o4Cd8" },
-            { id: "sejarah_xi", title: "Sejarah Indonesia", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/DKKQd7koBj8q5N7g6" }
+            { title: "Matematika", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/VNq6DuL6X2NVLWzA7" },
+            { title: "Sejarah Indonesia", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/vpGGyt3gtBMTg5yp6" },
+            { title: "Matematika", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/S1zkKEuyESG2o4Cd8" },
+            { title: "Sejarah Indonesia", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/DKKQd7koBj8q5N7g6" }
         ],
         "2026-12-01": [
-            { id: "inggris_x", title: "Bahasa Inggris", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/gjwxMsSy4F6XpXQb8" },
-            { id: "seni_x", title: "Seni", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
-            { id: "inggris_xi", title: "Bahasa Inggris", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
-            { id: "jepang_xi", title: "Bahasa Jepang", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" }
+            { title: "Bahasa Inggris", sesi: "Sesi I (07.15 - 08.45)", kelas: "Kelas X", link: "https://forms.gle/gjwxMsSy4F6XpXQb8" },
+            { title: "Seni", sesi: "Sesi II (09.00 - 10.30)", kelas: "Kelas X", link: "https://forms.gle/SCbsdAij6m2ygMVFA" },
+            { title: "Bahasa Inggris", sesi: "Sesi III (10.45 - 12.15)", kelas: "Kelas XI", link: "https://forms.gle/Zdx6d9SrjzgX8MYj9" },
+            { title: "Bahasa Jepang", sesi: "Sesi IV (12.30 - 14.00)", kelas: "Kelas XI", link: "https://forms.gle/Jt8Sr5n5TEj3zExP8" }
         ],
         "2026-12-02": [
-            { id: "info_x", title: "Informatika", sesi: "Sesi I (07.15 - 09.00)", kelas: "Kelas X", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" },
-            { id: "penjas_x", title: "KKA / Penjasorkes", sesi: "Sesi II (09.15 - 11.00)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
-            { id: "penjas_xi", title: "Penjasorkes", sesi: "Sesi III (11.15 - 12.45)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
-            { id: "kejuruan_xi", title: "Konsentrasi Kejuruan", sesi: "Sesi IV (13.00 - 14.30)", kelas: "Kelas XI", link: "https://forms.gle/M7XWV47fURU2gv3g9" }
+            { title: "Informatika", sesi: "Sesi I (07.15 - 09.00)", kelas: "Kelas X", link: "https://forms.gle/hN8H4gN8SGJk2YWb9" },
+            { title: "KKA / Penjasorkes", sesi: "Sesi II (09.15 - 11.00)", kelas: "Kelas X", link: "https://forms.gle/5DbSZaAXPNS68gxE7" },
+            { title: "Penjasorkes", sesi: "Sesi III (11.15 - 12.45)", kelas: "Kelas XI", link: "https://forms.gle/632xyTxqfveQUPFf6" },
+            { title: "Konsentrasi Kejuruan", sesi: "Sesi IV (13.00 - 14.30)", kelas: "Kelas XI", link: "https://forms.gle/M7XWV47fURU2gv3g9" }
         ]
     };
 
@@ -452,7 +434,7 @@
     }
 
     let jumlahKabur = 0;
-    const batasKabur = 2;
+    const batasKabur = 2; // Maksimal 2 kali keluar tab
 
     // Deteksi Berpindah Tab / Keluar Layar dengan Peringatan Bertahap Berkedip
     document.addEventListener("visibilitychange", async function() {
@@ -510,30 +492,6 @@
         return "K5-" + String(hashCode).padStart(4, '0');
     }
 
-    // Fungsi Hitung Mundur Global Sesi Ujian (Berakhir pukul 14.30.00 WIB)
-    function updateGlobalTimer() {
-        const now = new Date();
-        const target = new Date();
-        target.setHours(14, 30, 0, 0); // Batas akhir ujian jam 14.30
-
-        const diff = target - now;
-        if (diff <= 0) {
-            document.getElementById('globalCountdown').textContent = "Waktu Ujian Selesai";
-            return;
-        }
-
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById('globalCountdown').textContent = 
-            String(hours).padStart(2, '0') + ":" + 
-            String(minutes).padStart(2, '0') + ":" + 
-            String(seconds).padStart(2, '0');
-    }
-
-    setInterval(updateGlobalTimer, 1000);
-
     function renderMenuSchedule() {
         const now = new Date();
         const yyyy = now.getFullYear();
@@ -549,6 +507,7 @@
         container.innerHTML = '';
 
         const listMapel = jadwalUjian[todayStr];
+
         const opsiTanggal = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         subHeaderInfo.textContent = now.toLocaleDateString('id-ID', opsiTanggal);
 
@@ -557,9 +516,9 @@
             return;
         }
 
-        // Ambil data status selesai dari localStorage
-        const completedExams = JSON.parse(localStorage.getItem('completed_exams_' + todayStr) || "[]");
-
+        // Filter berdasarkan Jam Sesi Aktif
+        // Kelas X: Sesi 1 & 2 (Tampil mulai pukul 07.00 s.d. 11.00)
+        // Kelas XI: Sesi 3 & 4 (Tampil mulai pukul 10.30 s.d. 14.30)
         const showKelasX = currentTimeVal >= (7 * 60) && currentTimeVal < (11 * 60);
         const showKelasXI = currentTimeVal >= (10 * 60 + 30) && currentTimeVal < (14 * 60 + 30);
 
@@ -568,10 +527,12 @@
 
         listMapel.forEach(item => {
             if (item.kelas === "Kelas X" && showKelasX) {
+                // Batasi hanya Sesi I dan Sesi II
                 if (item.sesi.includes("Sesi I") || item.sesi.includes("Sesi II")) {
                     mapelX.push(item);
                 }
             } else if (item.kelas === "Kelas XI" && showKelasXI) {
+                // Batasi hanya Sesi III dan Sesi IV
                 if (item.sesi.includes("Sesi III") || item.sesi.includes("Sesi IV")) {
                     mapelXI.push(item);
                 }
@@ -580,50 +541,50 @@
 
         let htmlContent = '';
 
-        // Render Kelas X
+        // Render Bagian Kelas X
         if (mapelX.length > 0) {
-            htmlContent += `<div class="class-section-title">📂 Daftar Mata Pelajaran Kelas X (Sesi Aktif)</div>`;
+            htmlContent += `<div class="class-section-title">📂 Daftar Mata Pelajaran Kelas X (Sesi 1 & 2 Aktif)</div>`;
             htmlContent += `<div class="class-grid">`;
             mapelX.forEach(item => {
-                const isDone = completedExams.includes(item.id);
                 htmlContent += `
                     <div class="item-card">
                         <div>
                             <div class="item-title">${item.title}</div>
                             <div class="item-sesi">⏱️ ${item.sesi}</div>
                         </div>
-                        <button onclick="${isDone ? '' : `bukaGForm('${item.link}', '${item.id}')`}" class="btn-gform ${isDone ? 'completed' : ''}">
-                            ${isDone ? '✔️ Selesai Dikerjakan' : 'Kerjakan Soal'}
-                        </button>
+                        <button onclick="bukaGForm('${item.link}')" class="btn-gform">Kerjakan Soal</button>
                     </div>
                 `;
             });
             htmlContent += `</div>`;
+        } else if (showKelasX) {
+            htmlContent += `<div class="class-section-title">📂 Daftar Mata Pelajaran Kelas X</div>`;
+            htmlContent += `<div style="font-size:13px; color:#64748b; margin-bottom:15px;">Belum ada sesi ujian Kelas X yang aktif saat ini.</div>`;
         }
 
-        // Render Kelas XI
+        // Render Bagian Kelas XI
         if (mapelXI.length > 0) {
-            htmlContent += `<div class="class-section-title" style="margin-top: 15px;">📂 Daftar Mata Pelajaran Kelas XI (Sesi Aktif)</div>`;
+            htmlContent += `<div class="class-section-title" style="margin-top: 20px;">📂 Daftar Mata Pelajaran Kelas XI (Sesi 3 & 4 Aktif)</div>`;
             htmlContent += `<div class="class-grid">`;
             mapelXI.forEach(item => {
-                const isDone = completedExams.includes(item.id);
                 htmlContent += `
                     <div class="item-card">
                         <div>
                             <div class="item-title">${item.title}</div>
                             <div class="item-sesi">⏱️ ${item.sesi}</div>
                         </div>
-                        <button onclick="${isDone ? '' : `bukaGForm('${item.link}', '${item.id}')`}" class="btn-gform ${isDone ? 'completed' : ''}">
-                            ${isDone ? '✔️ Selesai Dikerjakan' : 'Kerjakan Soal'}
-                        </button>
+                        <button onclick="bukaGForm('${item.link}')" class="btn-gform">Kerjakan Soal</button>
                     </div>
                 `;
             });
             htmlContent += `</div>`;
+        } else if (currentTimeVal >= (7 * 60) && !showKelasXI) {
+            htmlContent += `<div class="class-section-title" style="margin-top: 20px;">📂 Daftar Mata Pelajaran Kelas XI</div>`;
+            htmlContent += `<div style="font-size:13px; color:#64748b; margin-bottom:15px;">Sesi ujian Kelas XI belum dimulai (aktif mulai pukul 10.30 WIB).</div>`;
         }
 
         if (htmlContent === '') {
-            htmlContent = `<div class="no-schedule-msg">Belum ada sesi ujian yang dibuka pada jam ini atau sesi telah berakhir. Silakan tunggu jadwal sesi ujian berikutnya!</div>`;
+            htmlContent = `<div class="no-schedule-msg">Belum ada sesi ujian yang dibuka pada jam ini. Silakan tunggu hingga jadwal sesi ujian dimulai!</div>`;
         }
 
         container.innerHTML = htmlContent;
@@ -643,26 +604,10 @@
         }
     }
 
-    function bukaGForm(urlForm, mapelId) {
-        activeMapelKey = mapelId;
+    function bukaGForm(urlForm) {
         document.getElementById('gformIframe').src = urlForm;
         document.getElementById('gformSection').style.display = 'flex';
         requestWakeLock();
-    }
-
-    // Ketika siswa menekan tombol selesai/keluar, tandai mapel ini selesai di localStorage lalu arahkan ke login
-    function keluarKeLogin() {
-        if (activeMapelKey) {
-            const now = new Date();
-            const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-            let completedExams = JSON.parse(localStorage.getItem('completed_exams_' + todayStr) || "[]");
-            if (!completedExams.includes(activeMapelKey)) {
-                completedExams.push(activeMapelKey);
-                localStorage.setItem('completed_exams_' + todayStr, JSON.stringify(completedExams));
-            }
-            activeMapelKey = null;
-        }
-        logout();
     }
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -685,7 +630,6 @@
         document.getElementById('warningOverlay').style.display = 'none';
         document.getElementById('tokenInput').value = '';
         jumlahKabur = 0;
-        activeMapelKey = null;
         switchTab('login');
     }
 </script>
