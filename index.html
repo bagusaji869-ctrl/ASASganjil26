@@ -546,8 +546,8 @@
         // Pengaturan waktu aktif:
         // Sesi 1 & 2 Aktif: Pukul 07.30 s.d. 10.45 WIB (Kelas X tampil, Kelas XI belum)
         // Sesi 3 & 4 Aktif: Pukul 11.00 s.d. 14.15 WIB (Kelas X otomatis tertutup, Kelas XI tampil)
-        const isSesi12Active = currentTimeVal >= (7 * 60 + 30) && currentTimeVal <= (10 * 60 + 45);
-        const isSesi34Active = currentTimeVal >= (11 * 60) && currentTimeVal <= (14 * 60 + 15);
+        const isSesi12Active = currentTimeVal >= (7 * 60 + 10) && currentTimeVal <= (10 * 60);
+        const isSesi34Active = currentTimeVal >= (11 * 60 + 30) && currentTimeVal <= (14 * 60 + 15);
 
         const mapelX = [];
         const mapelXI = [];
